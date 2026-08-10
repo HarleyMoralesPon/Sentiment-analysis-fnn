@@ -5,6 +5,8 @@ from src.vocabulary import (build_vocabulary,
                             create_word_to_index, 
                             create_index_to_word)
 from src.vectorizer import transform_dataset    
+from src.dataset import prepare_dataset 
+import numpy as np
 
 # ==========================================
 # 1. Load Dataset
@@ -40,3 +42,31 @@ X = transform_dataset(df["Text"], word_to_index)
 print(X.shape)
 
 print(X[:5])
+
+
+# =====================================
+# 5. Prepare Dataset
+# =====================================
+
+X_train, X_test, y_train, y_test = prepare_dataset(
+    X,
+    df
+)
+
+print("Training set")
+print(X_train.shape)
+print(y_train.shape)
+
+print()
+
+print("Testing set")
+print(X_test.shape)
+print(y_test.shape)
+
+print("\nTraining distribution")
+
+print(np.unique(y_train, return_counts=True))
+
+print("\nTesting distribution")
+
+print(np.unique(y_test, return_counts=True))
