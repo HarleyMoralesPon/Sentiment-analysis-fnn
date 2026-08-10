@@ -1,9 +1,10 @@
 from collections import Counter
 
 
-'''
-Function 1: build vocabulary
-'''
+# ==========================================
+# 1. function 1: build vocabulary
+# ==========================================
+
 def build_vocabulary(texts, min_frequency=1):
     """
     Build a vocabulary from a collection of texts.
@@ -46,12 +47,10 @@ def build_vocabulary(texts, min_frequency=1):
 
 
 
+# ==========================================
+# function 2:  word to index
+# ==========================================
 
-
-
-'''
-Function 2:Word to Index
-'''
 
 def create_word_to_index(vocabulary):
     """
@@ -70,9 +69,9 @@ def create_word_to_index(vocabulary):
 
 
 
-'''
-function 3: Index to Word
-'''
+# ==========================================
+# function 3: Index to Word
+# ==========================================
 
 def create_index_to_word(vocabulary):
     """
@@ -81,7 +80,7 @@ def create_index_to_word(vocabulary):
 
     return {
 
-        idx: word
+        idx: word   
 
         for idx, word in enumerate(vocabulary)
 
