@@ -94,3 +94,17 @@ print("b1 shape:", model.b1.shape)
 
 print("W2 shape:", model.W2.shape)
 print("b2 shape:", model.b2.shape)
+
+# -----------------------------------------
+# 7. Sigmoid Activation Function and forward propagation
+# -----------------------------------------
+
+model = FeedForwardNeuralNetwork(
+    input_size=X_train.shape[1]
+)
+
+predictions = model.forward(X_train)
+
+print(predictions.shape)
+
+print(predictions[:5])
