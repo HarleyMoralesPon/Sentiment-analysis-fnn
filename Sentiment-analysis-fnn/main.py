@@ -6,6 +6,7 @@ from src.vocabulary import (build_vocabulary,
                             create_index_to_word)
 from src.vectorizer import transform_dataset    
 from src.dataset import prepare_dataset 
+from src.neural_network import FeedForwardNeuralNetwork
 import numpy as np
 
 # ==========================================
@@ -70,3 +71,26 @@ print(np.unique(y_train, return_counts=True))
 print("\nTesting distribution")
 
 print(np.unique(y_test, return_counts=True))
+
+
+# -----------------------------------------
+# 6. Initialize the Neural Network
+# -----------------------------------------
+
+model = FeedForwardNeuralNetwork(
+    input_size=X_train.shape[1],
+    hidden_size=32,
+    output_size=1,
+    learning_rate=0.01,
+    random_state=42
+)
+
+# -----------------------------------------
+# Verify the parameters
+# -----------------------------------------
+
+print("W1 shape:", model.W1.shape)
+print("b1 shape:", model.b1.shape)
+
+print("W2 shape:", model.W2.shape)
+print("b2 shape:", model.b2.shape)
