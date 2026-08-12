@@ -54,6 +54,7 @@ class FeedForwardNeuralNetwork:
 
         return 1 / (1 + np.exp(-Z))
 
+
 # ==========================================
 # Forward propagation 
 # ==========================================
@@ -69,6 +70,7 @@ class FeedForwardNeuralNetwork:
         self.A2 = self.sigmoid(self.Z2)
 
         return self.A2
+
 
 ####################################################################
 # LOSS FUNCTION
@@ -95,3 +97,45 @@ class FeedForwardNeuralNetwork:
         )
 
         return loss
+
+
+####################################################################
+# BACKPROPAGATION
+####################################################################
+
+    def backward(self, X, y_true):
+
+        m = X.shape[0]
+
+        # Output layer
+        self.dZ2 = self.A2 - y_true
+
+        self.dW2 = (1 / m) * np.dot(
+            self.A1.T,
+            self.dZ2
+        )
+
+        self.db2 = (1 / m) * np.sum(
+            self.dZ2,
+            axis=0,
+            keepdims=True
+        )
+
+        # Hidden layer
+        self.dA1 = np.dot(
+            self.dZ2,
+            self.W2.T
+        )
+
+        self.dZ1 = self.dA1 * self.A1 * (1 - self.A1)
+
+        self.dW1 = (1 / m) * np.dot(
+            X.T,
+            self.dZ1
+        )
+
+        self.db1 = (1 / m) * np.sum(
+            self.dZ1,
+            axis=0,
+            keepdims=True
+        )

@@ -117,3 +117,31 @@ loss = model.compute_loss(
 )
 
 print(loss)
+
+# -----------------------------------------
+# 9. Backward Propagation
+# -----------------------------------------
+
+predictions = model.forward(X_train)
+
+loss = model.compute_loss(
+    y_train,
+    predictions
+)
+
+model.backward(
+    X_train,
+    y_train
+)
+
+print("Loss:", loss)
+
+print()
+
+print("dW1:", model.dW1.shape)
+print("db1:", model.db1.shape)
+
+print()
+
+print("dW2:", model.dW2.shape)
+print("db2:", model.db2.shape)
