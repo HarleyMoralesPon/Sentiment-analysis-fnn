@@ -139,3 +139,70 @@ class FeedForwardNeuralNetwork:
             axis=0,
             keepdims=True
         )
+
+####################################################################
+# GRADIENT DESCENT
+####################################################################
+
+    def update_parameters(self):
+
+        self.W1 -= self.learning_rate * self.dW1
+        self.b1 -= self.learning_rate * self.db1
+
+        self.W2 -= self.learning_rate * self.dW2
+        self.b2 -= self.learning_rate * self.db2
+
+####################################################################
+# TRAINING
+####################################################################
+
+    def train(self, X, y, iterations=1000):
+
+        self.loss_history = []
+
+        for i in range(iterations):
+
+            # Forward
+            predictions = self.forward(X)
+
+            # Loss
+            loss = self.compute_loss(
+                y,
+                predictions
+            )
+
+            self.loss_history.append(loss)
+
+            # Backward
+            self.backward(
+                X,
+                y
+            )
+
+            # Gradient Descent
+            self.update_parameters()
+
+            if i % 100 == 0:
+
+                print(
+                    f"Iteration {i:4d} | Loss = {loss:.6f}"
+                )
+####################################################################
+# PREDICT PROBABILITIES
+####################################################################
+
+    def predict_proba(self, X):
+
+        return self.forward(X)
+
+####################################################################
+# PREDICT CLASSES
+####################################################################
+
+    def predict(self, X):
+
+        probabilities = self.predict_proba(X)
+
+        predictions = (probabilities >= 0.5).astype(int)
+
+        return predictions

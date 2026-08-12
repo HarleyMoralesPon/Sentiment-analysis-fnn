@@ -8,6 +8,7 @@ from src.vectorizer import transform_dataset
 from src.dataset import prepare_dataset 
 from src.neural_network import FeedForwardNeuralNetwork
 import numpy as np
+from sklearn.metrics import accuracy_score
 
 # ==========================================
 # 1. Load Dataset
@@ -145,3 +146,57 @@ print()
 
 print("dW2:", model.dW2.shape)
 print("db2:", model.db2.shape)
+
+
+# -----------------------------------------
+# 10. Training the Neural Network
+# -----------------------------------------
+# -----------------------------------------
+# Create the model
+# -----------------------------------------
+
+model = FeedForwardNeuralNetwork(
+    input_size=X_train.shape[1],
+    hidden_size=32,
+    output_size=1,
+    learning_rate=0.01,
+    random_state=42
+)
+
+# -----------------------------------------
+# Train
+# -----------------------------------------
+
+model.train(
+    X_train,
+    y_train,
+    iterations=1000
+)
+
+# -----------------------------------------
+# Predictions
+# -----------------------------------------
+
+train_predictions = model.predict(X_train)
+
+test_predictions = model.predict(X_test)
+
+# -----------------------------------------
+# Accuracy
+# -----------------------------------------
+
+train_accuracy = accuracy_score(
+    y_train,
+    train_predictions
+)
+
+test_accuracy = accuracy_score(
+    y_test,
+    test_predictions
+)
+
+print()
+
+print(f"Train Accuracy: {train_accuracy:.4f}")
+
+print(f"Test Accuracy : {test_accuracy:.4f}")
