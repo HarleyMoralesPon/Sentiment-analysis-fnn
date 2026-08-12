@@ -85,10 +85,6 @@ model = FeedForwardNeuralNetwork(
     random_state=42
 )
 
-# -----------------------------------------
-# Verify the parameters
-# -----------------------------------------
-
 print("W1 shape:", model.W1.shape)
 print("b1 shape:", model.b1.shape)
 
@@ -108,3 +104,16 @@ predictions = model.forward(X_train)
 print(predictions.shape)
 
 print(predictions[:5])
+
+# -----------------------------------------
+# 8. Compute Loss
+# -----------------------------------------
+
+predictions = model.forward(X_train)
+
+loss = model.compute_loss(
+    y_train,
+    predictions
+)
+
+print(loss)
