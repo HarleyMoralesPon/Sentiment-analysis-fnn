@@ -9,6 +9,8 @@ from src.dataset import prepare_dataset
 from src.neural_network import FeedForwardNeuralNetwork
 import numpy as np
 from sklearn.metrics import accuracy_score
+from src.metrics import evaluate_model
+from src.metrics import plot_loss
 
 # ==========================================
 # 1. Load Dataset
@@ -179,24 +181,22 @@ model.train(
 
 train_predictions = model.predict(X_train)
 
-test_predictions = model.predict(X_test)
+test_predictions_2 = model.predict(X_test)
+
 
 # -----------------------------------------
-# Accuracy
+# 11. Training the Neural Network
 # -----------------------------------------
 
-train_accuracy = accuracy_score(
+evaluate_model(
+    model,
+    X_train,
     y_train,
-    train_predictions
+    X_test,
+    y_test
 )
 
-test_accuracy = accuracy_score(
-    y_test,
-    test_predictions
-)
-
-print()
-
-print(f"Train Accuracy: {train_accuracy:.4f}")
-
-print(f"Test Accuracy : {test_accuracy:.4f}")
+# -----------------------------------------
+# 12. Plot the loss history
+# -----------------------------------------
+plot_loss(model)
